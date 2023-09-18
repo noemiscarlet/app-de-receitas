@@ -48,6 +48,7 @@ function Home() {
       </form>
       <CategoryList
         categories={ categories }
+        getProducts={ getProducts }
       />
       <ProductList productList={ productList } />
     </main>
