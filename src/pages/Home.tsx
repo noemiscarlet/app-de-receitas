@@ -1,14 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import CategoryList from '../components/CategoryList';
+import { CategoryType, ProductType } from '../types';
+import ProductList from '../components/ProductList';
 
 function Home() {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [productList, setProductList] = useState<ProductType[]>([]);
 
   useEffect(() => {
     getCategories().then((response) => setCategories(response));
   }, []);
+
+  const getProducts = (event: FormEvent) => {
+    event.preventDefault();
+
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    const query = searchInput ? searchInput.value : '';
+
+    const categoryInput = document.querySelector('input[name="category"]:checked');
+    const categoryId = categoryInput ? categoryInput.id : '';
+
+    getProductsFromCategoryAndQuery(categoryId, query).then((response) => {
+      setProductList(response.results);
+    });
+  };
 
   return (
     <main>
@@ -18,9 +35,21 @@ function Home() {
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
+      <form onSubmit={ getProducts }>
+        <input
+          data-testid="query-input"
+          type="text"
+          name="query"
+          id="searchInput"
+        />
+        <button data-testid="query-button">
+          Buscar
+        </button>
+      </form>
       <CategoryList
         categories={ categories }
       />
+      <ProductList productList={ productList } />
     </main>
   );
 }
