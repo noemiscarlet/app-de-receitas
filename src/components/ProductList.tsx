@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ProductType } from '../types';
 
 type ProductListProps = {
@@ -13,9 +14,11 @@ function ProductList({ productList }: ProductListProps) {
             key={ product.id }
             data-testid="product"
           >
-            <img src={ product.thumbnail } alt={ product.title } />
-            <h4>{product.title}</h4>
-            <p>{product.price}</p>
+            <Link data-testid="product-detail-link" to={ `/product/${product.id}` }>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <h4>{product.title}</h4>
+              <p>{product.price}</p>
+            </Link>
           </div>
         ))
       }
