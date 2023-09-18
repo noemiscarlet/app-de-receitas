@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom';
+
 function Home() {
   return (
     <main>
+      <Link to="/cart" data-testid="shopping-cart-button">
+        Carrinho
+      </Link>
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
