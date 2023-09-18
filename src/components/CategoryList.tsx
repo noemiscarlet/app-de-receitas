@@ -1,12 +1,11 @@
-import { FormEvent } from 'react';
 import { CategoryType } from '../types';
 
 type CategoryListProps = {
   categories: CategoryType[],
-  getProducts: (event: FormEvent) => void
+  handleCategoryChange: () => void
 };
 
-function CategoryList({ categories, getProducts }: CategoryListProps) {
+function CategoryList({ categories, handleCategoryChange }: CategoryListProps) {
   return (
     <aside>
       <fieldset>
@@ -16,7 +15,7 @@ function CategoryList({ categories, getProducts }: CategoryListProps) {
               name="category"
               type="radio"
               id={ category.id }
-              onChange={ getProducts }
+              onChange={ handleCategoryChange }
             />
             <label
               data-testid="category"

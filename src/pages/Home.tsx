@@ -13,9 +13,7 @@ function Home() {
     getCategories().then((response) => setCategories(response));
   }, []);
 
-  const getProducts = (event: FormEvent) => {
-    event.preventDefault();
-
+  const getProducts = () => {
     const searchInput = document.getElementById('searchInput') as HTMLInputElement;
     const query = searchInput ? searchInput.value : '';
 
@@ -27,6 +25,15 @@ function Home() {
     });
   };
 
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    getProducts();
+  };
+
+  const handleCategoryChange = () => {
+    getProducts();
+  };
+
   return (
     <main>
       <Link to="/cart" data-testid="shopping-cart-button">
@@ -35,7 +42,7 @@ function Home() {
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
-      <form onSubmit={ getProducts }>
+      <form onSubmit={ handleFormSubmit }>
         <input
           data-testid="query-input"
           type="text"
@@ -48,7 +55,7 @@ function Home() {
       </form>
       <CategoryList
         categories={ categories }
-        getProducts={ getProducts }
+        handleCategoryChange={ handleCategoryChange }
       />
       <ProductList productList={ productList } />
     </main>
