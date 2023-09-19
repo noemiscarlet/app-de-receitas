@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { ProductType } from '../types';
 
 type ProductListProps = {
-  productList: ProductType[]
+  productList: ProductType[],
+  handleAddInCart: (product: ProductType) => void
 };
 
-function ProductList({ productList }: ProductListProps) {
+function ProductList({ productList, handleAddInCart }: ProductListProps) {
   return (
     <section>
       {
@@ -19,6 +20,12 @@ function ProductList({ productList }: ProductListProps) {
               <h4>{product.title}</h4>
               <p>{product.price}</p>
             </Link>
+            <button
+              data-testid="product-add-to-cart"
+              onClick={ () => handleAddInCart(product) }
+            >
+              Adicionar ao carrinho
+            </button>
           </div>
         ))
       }

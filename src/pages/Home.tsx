@@ -5,7 +5,11 @@ import CategoryList from '../components/CategoryList';
 import { CategoryType, ProductType } from '../types';
 import ProductList from '../components/ProductList';
 
-function Home() {
+type HomeProps = {
+  handleAddInCart: (product: ProductType) => void
+};
+
+function Home({ handleAddInCart }: HomeProps) {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [productList, setProductList] = useState<ProductType[]>([]);
 
@@ -57,7 +61,7 @@ function Home() {
         categories={ categories }
         handleCategoryChange={ handleCategoryChange }
       />
-      <ProductList productList={ productList } />
+      <ProductList productList={ productList } handleAddInCart={ handleAddInCart } />
     </main>
   );
 }
