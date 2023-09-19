@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ProductType } from '../types';
+import CartProduct from './CartProduct';
 
 function CartItems() {
   const [productsInCart, setProductsInCart] = useState<ProductType[]>([]);
@@ -7,19 +8,19 @@ function CartItems() {
   useEffect(() => {
     setProductsInCart(JSON.parse(localStorage.getItem('cart') || '[]'));
   }, []);
-
   return (
     <section>
       {productsInCart.length ? (
         productsInCart.map((product) => (
-          <div key={ product.id }>
-            <img src={ product.thumbnail } alt={ product.title } />
-            <p data-testid="shopping-cart-product-name">{product.title}</p>
-            <p data-testid="shopping-cart-product-quantity">
-              <strong>{product.quantity}</strong>
-            </p>
-            <p>{product.price}</p>
-          </div>
+          <CartProduct
+            key={ product.id }
+            title={ product.title }
+            thumbnail={ product.thumbnail }
+            price={ product.price }
+            id={ product.id }
+            productInCart={ setProductsInCart }
+
+          />
         ))
       ) : (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
