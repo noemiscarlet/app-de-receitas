@@ -4,6 +4,7 @@ import { getCategories, getProductsFromCategoryAndQuery } from '../services/api'
 import CategoryList from '../components/CategoryList';
 import { CategoryType, ProductType } from '../types';
 import ProductList from '../components/ProductList';
+import { addToCart } from '../services/localStorage';
 
 function Home() {
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -34,6 +35,10 @@ function Home() {
     getProducts();
   };
 
+  const handleAddInCart = (product: ProductType) => {
+    addToCart(product);
+  };
+
   return (
     <main>
       <Link to="/cart" data-testid="shopping-cart-button">
@@ -57,7 +62,7 @@ function Home() {
         categories={ categories }
         handleCategoryChange={ handleCategoryChange }
       />
-      <ProductList productList={ productList } />
+      <ProductList productList={ productList } handleAddInCart={ handleAddInCart } />
     </main>
   );
 }
