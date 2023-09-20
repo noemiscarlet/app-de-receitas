@@ -14,9 +14,9 @@ function CartProduct({ thumbnail, title, price, id, productInCart }: CartProduct
   function heandleButton(event: any) {
     const { name } = event.target;
     if (name === 'increase') {
-      setQuantity((prev) => prev += 1);
+      setQuantity((prev) => prev + 1);
     } else {
-      setQuantity((prev) => (prev === 1 ? 1 : prev -= 1));
+      setQuantity((prev) => (prev === 1 ? 1 : prev - 1));
     }
   }
   function removeProduct() {
