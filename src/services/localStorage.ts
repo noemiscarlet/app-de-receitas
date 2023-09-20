@@ -1,10 +1,10 @@
 import { ProductType } from '../types';
 
-const getCart = () => {
+export const getCart = () => {
   return JSON.parse(localStorage.getItem('cart') || '[]');
 };
 
-const setCart = (arrayCart: ProductType[]) => {
+export const setCart = (arrayCart: ProductType[]) => {
   localStorage.setItem('cart', JSON.stringify(arrayCart));
 };
 
