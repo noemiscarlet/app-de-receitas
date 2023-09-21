@@ -8,5 +8,5 @@ export type ProductType = {
   title: string;
   thumbnail: string;
   price: number;
-  quantity?: number;
+  quantity: number;
 };
