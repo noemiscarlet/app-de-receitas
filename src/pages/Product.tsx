@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import { ProductType } from '../types';
+import { CommentsForm } from '../components/CommentsForm';
+import { CommentsLoaded } from '../components/CommentsLoaded';
 
 type ProductProps = {
   handleAddInCart: (product: ProductType) => void
@@ -37,6 +39,7 @@ function Product({ handleAddInCart }: ProductProps) {
       <Link to="/cart" data-testid="shopping-cart-button">
         Carrinho
       </Link>
+      <CommentsForm />
     </section>
   );
 }
