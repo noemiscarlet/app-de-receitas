@@ -10,3 +10,9 @@ export type ProductType = {
   price: number;
   quantity?: number;
 };
+
+export type ObjectType = {
+  email: string,
+  text: string,
+  rating: string,
+};
