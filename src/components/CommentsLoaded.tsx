@@ -5,12 +5,11 @@ export function CommentsLoaded({ email, text, rating }: ObjectType) {
     <>
       <p data-testid="review-card-email">{email}</p>
       <p data-testid="review-card-rating">{text}</p>
-      <div>
+      <div data-testid="review-card-evaluation">
         { Array
           .from({ length: Number(rating) }, (_, index) => index + 1)
           .map((i) => (
             <p
-              data-testid="review-card-evaluation"
               key={ i }
             >
               &#9733;

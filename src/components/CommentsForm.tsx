@@ -28,7 +28,6 @@ export function CommentsForm() {
   const [inputValidation, setInputValidation] = useState(false);
   const { productId } = useParams();
   const [formObject, setFormObject] = useState<ObjectType>(formObjSchema);
-
   const cleanForm = () => {
     const radioButtons = document
       .querySelectorAll<HTMLInputElement>('input[type="radio"]');
@@ -38,6 +37,7 @@ export function CommentsForm() {
     });
 
     setFormObject(formObjSchema);
+    setInputValidation(false);
   };
 
   const handleChange = (e:ChangeEventType) => {
@@ -137,7 +137,7 @@ export function CommentsForm() {
 
         </button>
       </form>
-      {inputValidation && <p data-testid="submit-review-btn">Campos inválidos</p>}
+      {inputValidation && <p data-testid="error-msg">Campos inválidos</p>}
       { productId && getComment(productId).map(({ email, rating, text }, index) => (
         <CommentsLoaded key={ index } email={ email } rating={ rating } text={ text } />
       )) }
