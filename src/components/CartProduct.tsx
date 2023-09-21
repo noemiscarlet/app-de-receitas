@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { getCart, setCart } from '../services/localStorage';
 
 type CartProductProps = {
-  id:string;
+  id: string,
   thumbnail: string,
   title: string,
   price: number,
-  productInCart: (p:any)=> void;
-
+  productInCart: (p: any) => void;
 };
+
 function CartProduct({ thumbnail, title, price, id, productInCart }: CartProductProps) {
   const [quantity, setQuantity] = useState(1);
   function heandleButton(event: any) {
@@ -22,7 +22,7 @@ function CartProduct({ thumbnail, title, price, id, productInCart }: CartProduct
   function removeProduct() {
     const cartProducts = getCart();
     const filterPoducts = cartProducts.filter(
-      (product :CartProductProps) => product.id !== id,
+      (product: CartProductProps) => product.id !== id,
     );
     productInCart(filterPoducts);
     setCart(filterPoducts);
@@ -52,7 +52,7 @@ function CartProduct({ thumbnail, title, price, id, productInCart }: CartProduct
         +
 
       </button>
-      <p>{price * quantity }</p>
+      <p>{price * quantity}</p>
       <button
         onClick={ removeProduct }
         type="button"
